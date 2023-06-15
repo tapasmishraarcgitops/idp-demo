@@ -11,7 +11,7 @@ on:
         required: true
         description: "Repository user"
         type: string
-        default: "vfarcic"
+        default: "tapasmishraarc"
       repo-name:
         required: true
         description: "Repository name"
@@ -21,7 +21,7 @@ on:
         required: true
         description: "Image repository"
         type: string
-        default: "docker.io/vfarcic"
+        default: "docker.io/tapasmishra"
       environment:
         required: true
         description: "Environment to deploy app to (production, staging, development)"
