@@ -1,0 +1,222 @@
+
+Argo
+v2.7.4+a33baa3.dirty
+Argo
+Applications
+Settings
+User Info
+Documentation
+NAME
+NAME
+KINDS
+KINDS
+SYNC STATUS
+Synced
+5
+OutOfSync
+1
+HEALTH STATUS
+Healthy
+1
+Progressing
+4
+Degraded
+1
+Suspended
+0
+Missing
+1
+Unknown
+0
+Applications
+ port-k8s-exporter
+APPLICATION DETAILS TREE
+Log out
+APP HEALTH 
+ Degraded
+SYNC STATUS 
+ OutOfSync
+from 0.1.13 (0.1.13)
+Auto sync is enabled.
+LAST SYNC 
+ Syncing
+Running a few seconds ago (Fri Jun 16 2023 12:37:57 GMT-0400)
+one or more objects failed to apply, reason: ConfigMap in version "v1" cannot be handled as a ConfigMap: json: cannot unmarshal object into Go struct field ConfigMap.data of type string. Retrying attempt #5 at 4:37PM.
+ConfigMap
+cm
+config-k8s.yaml
+
+port-k8s-exporter
+38 minutes
+Secret
+secret
+port-k8s-exporter
+38 minutes
+ServiceAccount
+sa
+port-k8s-exporter
+38 minutes
+Deployment
+deploy
+port-k8s-exporter
+18 minutesrev:3
+ReplicaSet
+rs
+port-k8s-exporter-6f568db4d9
+11 minutesrev:3
+Pod
+pod
+port-k8s-exporter-6f568db4d9-w88g7
+11 minutescontainercreating0/1
+ReplicaSet
+rs
+port-k8s-exporter-797dbbf8f9
+17 minutesrev:2
+Pod
+pod
+port-k8s-exporter-797dbbf8f9-pqtwx
+17 minutescontainercreating0/1
+ReplicaSet
+rs
+port-k8s-exporter-dc85f9fbb
+18 minutesrev:1
+ClusterRole
+c-role
+port-k8s-exporter
+38 minutes
+ClusterRoleBinding
+crb
+port-k8s-exporter
+38 minutes
+
+SUMMARYPARAMETERSMANIFEST DIFFEVENTS
+Compact diffInline diff
+/ConfigMap/port-k8s-exporter/config-k8s.yaml
+
+apiVersion: v1
+data:
+  config.yaml:
+    resources:
+      - kind: v1/namespaces
+        port:
+          entity:
+            mappings:
+              - blueprint: '"cluster"'
+                identifier: '"coecluster"'
+                properties:
+                  provider: '"n/a"'
+                title: '"coecluster"'
+        selector:
+          query: .metadata.name | contains("kube-system")
+      - kind: v1/secrets
+        port:
+          entity:
+            mappings:
+              - blueprint: '"cluster"'
+                identifier: .metadata.name
+                properties:
+                  kube-config: .data.kubeconfig
+                title: .metadata.name
+        selector:
+          query: .type == "connection.crossplane.io/v1alpha1"
+      - kind: v1/namespaces
+        port:
+          entity:
+            mappings:
+              - blueprint: '"environment"'
+                identifier: .metadata.name + "-" + "coecluster"
+                relations:
+                  cluster: '"coecluster"'
+                title: .metadata.name
+        selector:
+          query: .metadata.annotations.environment == "true"
+      - kind: v1/namespaces
+        port:
+          entity:
+            mappings:
+              - blueprint: '"namespace"'
+                identifier: .metadata.name + "-" + "coecluster"
+                properties:
+                  creationTimestamp: .metadata.creationTimestamp
+                  labels: .metadata.labels
+                relations:
+                  Cluster: '"coecluster"'
+                title: .metadata.name
+        selector:
+          query: .metadata.name | startswith("kube") | not
+      - kind: devopstoolkitseries.com/v1alpha1/appclaims
+        port:
+          entity:
+            mappings:
+              - blueprint: '"backend-app"'
+                icon: '"Deployment"'
+                identifier: >-
+                  .metadata.name + "-appclaim-" + .metadata.namespace + "-" +
+                  "coecluster"
+                properties:
+                  db-size: .spec.parameters.db.size
+                  db-version: .spec.parameters.db.version
+                  host: .spec.parameters.host
+                  labels: .metadata.labels
+                  language: '"Go"'
+                  url: >-
+                    "https://github.com/" + .metadata.annotations.gitHubOrg +
+                    "/" + .metadata.annotations.gitHubRepo
+                relations:
+                  environment: .metadata.namespace + "-" + "coecluster"
+                title: .metadata.name
+        selector:
+          query: .spec.compositionSelector.matchLabels.type == "backend-db-google"
+      - kind: v1/nodes
+        port:
+          entity:
+            mappings:
+              - blueprint: '"node"'
+                icon: '"Node"'
+                identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "coecluster"
+                properties:
+                  creationTimestamp: .metadata.creationTimestamp
+                  kubeletVersion: '.status.nodeInfo.kubeletVersion | split("-") | .[0]'
+                  labels: .metadata.labels
+                  ready: '.status.conditions[] | select(.type == "Ready") | .status'
+                  totalCPU: .status.allocatable.cpu
+                  totalMemory: .status.allocatable.memory
+                relations:
+                  Cluster: '"coecluster"'
+                title: .metadata.name + "-" + "coecluster"
+      - kind: v1/pods
+        port:
+          entity:
+            mappings:
+              - blueprint: '"pod"'
+                icon: '"Microservices"'
+                identifier: >-
+                  .metadata.name + "-" + .metadata.namespace + "-" +
+                  "coecluster"
+                properties:
+                  conditions: .status.conditions
+                  containers: >-
+                    (.spec.containers | map({image, resources})) +
+                    .status.containerStatuses | group_by(.image) | map(add)
+                  labels: .metadata.labels
+                  phase: .status.phase
+                  startTime: .status.startTime
+                relations:
+                  Node: >-
+                    (.spec.nodeName) | (split(".")|join("_")) + "-" +
+                    "coecluster"
+                title: .metadata.name
+        selector:
+          query: .metadata.namespace | startswith("kube") | not
+  state_key: c2c186ee2edf4b5281c89357376fbdab
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: port-k8s-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: port-k8s-exporter
+    app.kubernetes.io/version: 0.1.9
+    helm.sh/chart: port-k8s-exporter-0.1.13
+  name: config-k8s.yaml
+  namespace: port-k8s-exporter
+
