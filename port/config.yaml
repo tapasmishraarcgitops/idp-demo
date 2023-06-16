@@ -5,8 +5,8 @@ resources:
     port:
       entity:
         mappings:
-          - identifier: '"dot"'
-            title: '"dot"'
+          - identifier: '"coecluster"'
+            title: '"coecluster"'
             blueprint: '"cluster"'
   - kind: v1/namespaces
     selector:
@@ -14,32 +14,32 @@ resources:
     port:
       entity:
         mappings:
-          - identifier: .metadata.name + "-" + "dot"
+          - identifier: .metadata.name + "-" + "coecluster"
             title: .metadata.labels.environment
             blueprint: '"environment"'
             relations:
-              cluster: '"dot"'
+              cluster: '"coecluster"'
   - kind: v1/namespaces
     selector:
       query: .metadata.name | startswith("kube") | not
     port:
       entity:
         mappings:
-          - identifier: .metadata.name + "-" + "dot"
+          - identifier: .metadata.name + "-" + "coecluster"
             title: .metadata.name
             blueprint: '"namespace"'
             properties:
               creationTimestamp: .metadata.creationTimestamp
               labels: .metadata.labels
             relations:
-              Cluster: '"dot"'
+              Cluster: '"coecluster"'
   - kind: devopstoolkitseries.com/v1alpha1/appclaims
     selector:
       query: .spec.compositionSelector.matchLabels.type == "backend-db-google"
     port:
       entity:
         mappings:
-          - identifier: .metadata.name + "-appclaim-" + .metadata.namespace + "-" + "dot"
+          - identifier: .metadata.name + "-appclaim-" + .metadata.namespace + "-" + "coecluster"
             title: .metadata.name
             icon: '"Deployment"'
             blueprint: '"backend-app"'
@@ -51,13 +51,13 @@ resources:
               db-size: .spec.parameters.db.size
               labels: .metadata.labels
             relations:
-              environment: .metadata.namespace + "-" + "dot"
+              environment: .metadata.namespace + "-" + "coecluster"
   - kind: v1/nodes
     port:
       entity:
         mappings:
-          - identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "dot"
-            title: .metadata.name + "-" + "dot"
+          - identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "coecluster"
+            title: .metadata.name + "-" + "coecluster"
             icon: '"Node"'
             blueprint: '"node"'
             properties:
@@ -68,14 +68,14 @@ resources:
               kubeletVersion: .status.nodeInfo.kubeletVersion | split("-") | .[0]
               ready: .status.conditions[] | select(.type == "Ready") | .status
             relations:
-              Cluster: '"dot"'
+              Cluster: '"coecluster"'
   - kind: v1/pods
     selector:
       query: .metadata.namespace | startswith("kube") | not 
     port:
       entity:
         mappings:
-          - identifier: .metadata.name + "-" + .metadata.namespace + "-" + "dot"
+          - identifier: .metadata.name + "-" + .metadata.namespace + "-" + "coecluster"
             title: .metadata.name
             icon: '"Microservices"'
             blueprint: '"pod"'
@@ -86,4 +86,4 @@ resources:
               containers: (.spec.containers | map({image, resources})) + .status.containerStatuses | group_by(.image) | map(add)
               conditions: .status.conditions
             relations:
-              Node: (.spec.nodeName) | (split(".")|join("_")) + "-" + "dot"
+              Node: (.spec.nodeName) | (split(".")|join("_")) + "-" + "coecluster"
