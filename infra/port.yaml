@@ -22,8 +22,8 @@ spec:
             portClientSecret: '"RmD8oID7s7HBD7pcQx5vJAzW9VxtAQvxZ1EXnic1V5R4MZ3ZtTawZtJlZf1Fm1fh"'
         configMap:
           name: config-k8s.yaml
-          # config: |-
-          config:
+          config: |-
+          # config:
             resources:
               - kind: v1/namespaces
                 selector:
