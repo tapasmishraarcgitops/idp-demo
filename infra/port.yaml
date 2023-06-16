@@ -1,4 +1,3 @@
-
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -19,8 +18,8 @@ spec:
         installCRDs: true
         secret:
           secrets:
-            portClientId: WL17EYqO9sHE1YuFCW3E06iiVvct1nu6
-            portClientSecret: RmD8oID7s7HBD7pcQx5vJAzW9VxtAQvxZ1EXnic1V5R4MZ3ZtTawZtJlZf1Fm1fh
+            portClientId: CLIENT_ID
+            portClientSecret: CLIENT_SECRET
         configMap:
           name: config-k8s.yaml
           # config: |-
@@ -51,7 +50,7 @@ spec:
                           kube-config: .data.kubeconfig
               - kind: v1/namespaces
                 selector:
-                  query: .metadata.anncoeclusterations.environment == "true"
+                  query: .metadata.annotations.environment == "true"
                 port:
                   entity:
                     mappings:
@@ -62,7 +61,7 @@ spec:
                           cluster: '"coecluster"'
               - kind: v1/namespaces
                 selector:
-                  query: .metadata.name | startswith("kube") | ncoecluster
+                  query: .metadata.name | startswith("kube") | not
                 port:
                   entity:
                     mappings:
@@ -85,7 +84,7 @@ spec:
                         icon: '"Deployment"'
                         blueprint: '"backend-app"'
                         properties:
-                          url: '"https://github.com/" + .metadata.anncoeclusterations.gitHubOrg + "/" + .metadata.anncoeclusterations.gitHubRepo'
+                          url: '"https://github.com/" + .metadata.annotations.gitHubOrg + "/" + .metadata.annotations.gitHubRepo'
                           language: '"Go"'
                           host: .spec.parameters.host
                           db-version: .spec.parameters.db.version
@@ -103,8 +102,8 @@ spec:
                         blueprint: '"node"'
                         properties:
                           creationTimestamp: .metadata.creationTimestamp
-                          tcoeclusteralCPU: .status.allocatable.cpu
-                          tcoeclusteralMemory: .status.allocatable.memory
+                          totalCPU: .status.allocatable.cpu
+                          totalMemory: .status.allocatable.memory
                           labels: .metadata.labels
                           kubeletVersion: .status.nodeInfo.kubeletVersion | split("-") | .[0]
                           ready: .status.conditions[] | select(.type == "Ready") | .status
@@ -112,7 +111,7 @@ spec:
                           Cluster: '"coecluster"'
               - kind: v1/pods
                 selector:
-                  query: .metadata.namespace | startswith("kube") | ncoecluster 
+                  query: .metadata.namespace | startswith("kube") | not 
                 port:
                   entity:
                     mappings:
