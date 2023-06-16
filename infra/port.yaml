@@ -35,7 +35,7 @@ spec:
                         title: "coecluster"
                         blueprint: "cluster"
                         properties:
-                          provider: '"n/a"'
+                          provider: "n/a"
 
               - kind: v1/secrets
                 selector:
