@@ -31,8 +31,8 @@ spec:
                 port:
                   entity:
                     mappings:
-                      - identifier: '"dot"'
-                        title: '"dot"'
+                      - identifier: '"dcoecluster"'
+                        title: '"dcoecluster"'
                         blueprint: '"cluster"'
                         properties:
                           provider: '"n/a"'
@@ -61,72 +61,72 @@ spec:
                           kube-config: .data.kubeconfig
               - kind: v1/namespaces
                 selector:
-                  query: .metadata.annotations.environment == "true"
+                  query: .metadata.anncoeclusterations.environment == "true"
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-" + "dot"
+                      - identifier: .metadata.name + "-" + "dcoecluster"
                         title: .metadata.name
                         blueprint: '"environment"'
                         relations:
-                          cluster: '"dot"'
+                          cluster: '"dcoecluster"'
               - kind: v1/namespaces
                 selector:
-                  query: .metadata.name | startswith("kube") | not
+                  query: .metadata.name | startswith("kube") | ncoecluster
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-" + "dot"
+                      - identifier: .metadata.name + "-" + "dcoecluster"
                         title: .metadata.name
                         blueprint: '"namespace"'
                         properties:
                           creationTimestamp: .metadata.creationTimestamp
                           labels: .metadata.labels
                         relations:
-                          Cluster: '"dot"'
+                          Cluster: '"dcoecluster"'
               - kind: devopstoolkitseries.com/v1alpha1/appclaims
                 selector:
                   query: .spec.compositionSelector.matchLabels.type == "backend-db-google"
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-appclaim-" + .metadata.namespace + "-" + "dot"
+                      - identifier: .metadata.name + "-appclaim-" + .metadata.namespace + "-" + "dcoecluster"
                         title: .metadata.name
                         icon: '"Deployment"'
                         blueprint: '"backend-app"'
                         properties:
-                          url: '"https://github.com/" + .metadata.annotations.gitHubOrg + "/" + .metadata.annotations.gitHubRepo'
+                          url: '"https://github.com/" + .metadata.anncoeclusterations.gitHubOrg + "/" + .metadata.anncoeclusterations.gitHubRepo'
                           language: '"Go"'
                           host: .spec.parameters.host
                           db-version: .spec.parameters.db.version
                           db-size: .spec.parameters.db.size
                           labels: .metadata.labels
                         relations:
-                          environment: .metadata.namespace + "-" + "dot"
+                          environment: .metadata.namespace + "-" + "dcoecluster"
               - kind: v1/nodes
                 port:
                   entity:
                     mappings:
-                      - identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "dot"
-                        title: .metadata.name + "-" + "dot"
+                      - identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "dcoecluster"
+                        title: .metadata.name + "-" + "dcoecluster"
                         icon: '"Node"'
                         blueprint: '"node"'
                         properties:
                           creationTimestamp: .metadata.creationTimestamp
-                          totalCPU: .status.allocatable.cpu
-                          totalMemory: .status.allocatable.memory
+                          tcoeclusteralCPU: .status.allocatable.cpu
+                          tcoeclusteralMemory: .status.allocatable.memory
                           labels: .metadata.labels
                           kubeletVersion: .status.nodeInfo.kubeletVersion | split("-") | .[0]
                           ready: .status.conditions[] | select(.type == "Ready") | .status
                         relations:
-                          Cluster: '"dot"'
+                          Cluster: '"dcoecluster"'
               - kind: v1/pods
                 selector:
-                  query: .metadata.namespace | startswith("kube") | not 
+                  query: .metadata.namespace | startswith("kube") | ncoecluster 
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-" + .metadata.namespace + "-" + "dot"
+                      - identifier: .metadata.name + "-" + .metadata.namespace + "-" + "dcoecluster"
                         title: .metadata.name
                         icon: '"Microservices"'
                         blueprint: '"pod"'
@@ -137,7 +137,7 @@ spec:
                           containers: (.spec.containers | map({image, resources})) + .status.containerStatuses | group_by(.image) | map(add)
                           conditions: .status.conditions
                         relations:
-                          Node: (.spec.nodeName) | (split(".")|join("_")) + "-" + "dot"
+                          Node: (.spec.nodeName) | (split(".")|join("_")) + "-" + "dcoecluster"
   destination:
     server: https://kubernetes.default.svc
     namespace: port-k8s-exporter
