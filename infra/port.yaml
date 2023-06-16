@@ -1,3 +1,4 @@
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -31,8 +32,8 @@ spec:
                 port:
                   entity:
                     mappings:
-                      - identifier: '"dcoecluster"'
-                        title: '"dcoecluster"'
+                      - identifier: '"coecluster"'
+                        title: '"coecluster"'
                         blueprint: '"cluster"'
                         properties:
                           provider: '"n/a"'
@@ -65,32 +66,32 @@ spec:
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-" + "dcoecluster"
+                      - identifier: .metadata.name + "-" + "coecluster"
                         title: .metadata.name
                         blueprint: '"environment"'
                         relations:
-                          cluster: '"dcoecluster"'
+                          cluster: '"coecluster"'
               - kind: v1/namespaces
                 selector:
                   query: .metadata.name | startswith("kube") | ncoecluster
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-" + "dcoecluster"
+                      - identifier: .metadata.name + "-" + "coecluster"
                         title: .metadata.name
                         blueprint: '"namespace"'
                         properties:
                           creationTimestamp: .metadata.creationTimestamp
                           labels: .metadata.labels
                         relations:
-                          Cluster: '"dcoecluster"'
+                          Cluster: '"coecluster"'
               - kind: devopstoolkitseries.com/v1alpha1/appclaims
                 selector:
                   query: .spec.compositionSelector.matchLabels.type == "backend-db-google"
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-appclaim-" + .metadata.namespace + "-" + "dcoecluster"
+                      - identifier: .metadata.name + "-appclaim-" + .metadata.namespace + "-" + "coecluster"
                         title: .metadata.name
                         icon: '"Deployment"'
                         blueprint: '"backend-app"'
@@ -102,13 +103,13 @@ spec:
                           db-size: .spec.parameters.db.size
                           labels: .metadata.labels
                         relations:
-                          environment: .metadata.namespace + "-" + "dcoecluster"
+                          environment: .metadata.namespace + "-" + "coecluster"
               - kind: v1/nodes
                 port:
                   entity:
                     mappings:
-                      - identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "dcoecluster"
-                        title: .metadata.name + "-" + "dcoecluster"
+                      - identifier: (.metadata.name) | (split(".")|join("_")) + "-" + "coecluster"
+                        title: .metadata.name + "-" + "coecluster"
                         icon: '"Node"'
                         blueprint: '"node"'
                         properties:
@@ -119,14 +120,14 @@ spec:
                           kubeletVersion: .status.nodeInfo.kubeletVersion | split("-") | .[0]
                           ready: .status.conditions[] | select(.type == "Ready") | .status
                         relations:
-                          Cluster: '"dcoecluster"'
+                          Cluster: '"coecluster"'
               - kind: v1/pods
                 selector:
                   query: .metadata.namespace | startswith("kube") | ncoecluster 
                 port:
                   entity:
                     mappings:
-                      - identifier: .metadata.name + "-" + .metadata.namespace + "-" + "dcoecluster"
+                      - identifier: .metadata.name + "-" + .metadata.namespace + "-" + "coecluster"
                         title: .metadata.name
                         icon: '"Microservices"'
                         blueprint: '"pod"'
@@ -137,7 +138,7 @@ spec:
                           containers: (.spec.containers | map({image, resources})) + .status.containerStatuses | group_by(.image) | map(add)
                           conditions: .status.conditions
                         relations:
-                          Node: (.spec.nodeName) | (split(".")|join("_")) + "-" + "dcoecluster"
+                          Node: (.spec.nodeName) | (split(".")|join("_")) + "-" + "coecluster"
   destination:
     server: https://kubernetes.default.svc
     namespace: port-k8s-exporter
