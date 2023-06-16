@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  config.yaml:
+    - kind: v1/namespaces
+      selector:
+        query: .metadata.name | contains("kube-system")
+kind: ConfigMap
+metadata:
+  labels:
+  name: config-k8s.yaml
+  namespace: port-k8s-exporter
