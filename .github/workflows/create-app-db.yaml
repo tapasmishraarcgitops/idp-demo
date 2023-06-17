@@ -6,7 +6,7 @@ on:
         required: true
         description: "Repository organization"
         type: string
-        default: "devopsparadox"
+        default: "tapasmishraarcgitops"
       repo-user:
         required: true
         description: "Repository user"
