@@ -44,7 +44,7 @@
   },
   "invocationMethod": {
     "type": "GITHUB",
-    "org": "vfarcic",
+    "org": "tapasmishraarcgitops",
     "repo": "idp-demo",
     "workflow": "create-cluster.yaml",
     "omitPayload": true
