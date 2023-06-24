@@ -10,7 +10,7 @@ spec:
     name: PROVIDER
   parameters:
     # Possible values small, medium, large
-    nodeSize: small
+    nodeSize: SIZE
     # version: "1.20"
     # minNodeCount: 2
   writeConnectionSecretToRef:
