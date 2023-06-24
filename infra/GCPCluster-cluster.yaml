@@ -2,6 +2,7 @@ apiVersion: devopstoolkitseries.com/v1alpha1
 kind: CompositeKubernetesCluster
 metadata:
   name: gcpcluster
+  namespace: infra
   labels:
     cluster-owner: tapasmishra
 spec:
