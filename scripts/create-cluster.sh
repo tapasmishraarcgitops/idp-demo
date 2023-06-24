@@ -6,7 +6,7 @@ MIN_NODE_COUNT=$5
 
 FILE_PATH=infra/${NAME}-cluster.yaml
 
-cp crossplane/cluster-template.yaml $FILE_PATH
+cp crossplane/cluster-template-new.yaml $FILE_PATH
 yq --inplace ".metadata.name = \"${NAME}\"" $FILE_PATH
 # yq --inplace ".spec.id = \"${NAME}\"" $FILE_PATH
 yq --inplace ".spec.compositionRef.name = \"${PROVIDER}\"" $FILE_PATH
