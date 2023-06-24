@@ -17,5 +17,5 @@ spec:
 
     minNodeCount: 1
   writeConnectionSecretToRef:
-    namespace: crossplane-system
-    name: gcp-creds
+    namespace: infra
+    name: cluster
