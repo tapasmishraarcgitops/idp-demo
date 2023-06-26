@@ -14,6 +14,6 @@ spec:
     nodeSize: small
     # version: "1.20"
     minNodeCount: 1
-writeConnectionSecretToRef:
-    namespace: infra
-    name: cluster
+# writeConnectionSecretToRef:
+#     namespace: infra
+#     name: cluster
