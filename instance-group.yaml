@@ -1,0 +1,24 @@
+apiVersion: container.gcp.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/instancegroupnamedport
+    upjet.upbound.io/manual-intervention: Instance group name is generated
+      (gke-instance-group-named-default-pool-eb15fe12-grp). Needs explicit
+      reference
+  labels:
+    testing.upbound.io/example-name: instance-group-named-port
+  name: instance-group-named-port
+spec:
+  forProvider:
+    initialNodeCount: 1
+    ipAllocationPolicy:
+      - clusterIpv4CidrBlock: /19
+        servicesIpv4CidrBlock: /22
+    location: europe-west1
+    networkSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance-group-named-port
+    subnetworkSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance-group-named-port

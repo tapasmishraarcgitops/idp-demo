@@ -1,0 +1,27 @@
+apiVersion: compute.gcp.crossplane.io/v1beta1
+kind: Network
+metadata:
+  name: network
+spec:
+  forProvider:
+    autoCreateSubnetworks: false
+    description: 'This is a network built by crossplane'
+    routingConfig: 
+      routingMode: 'REGIONAL'
+  providerConfigRef:
+    name: gcp-provider
+---
+apiVersion: compute.gcp.crossplane.io/v1beta1
+kind: Subnetwork
+metadata:
+  name: subnet
+spec:
+  forProvider:
+    ipCidrRange: '10.144.0.0/20'
+    networkRef: 
+      # make sure this matches the network name you defined in Network
+      name: network
+    region: europe-west1
+  providerConfigRef:
+    name: gcp-provider
+

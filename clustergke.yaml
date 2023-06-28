@@ -1,0 +1,16 @@
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: ClusterClaim
+metadata:
+  labels:
+    app.kubernetes.io/instance: production-infra
+  name: gcpcluster
+  namespace: infra
+spec:
+  compositionSelector:
+    matchLabels:
+      cluster: google-cluster
+      provider: crossplane-provider-gcp-official
+  id: gcpcluster
+  parameters:
+    minNodeCount: 1
+    nodeSize: small

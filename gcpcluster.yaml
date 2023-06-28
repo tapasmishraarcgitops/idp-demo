@@ -1,0 +1,16 @@
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: CompositeKubernetesCluster
+metadata:
+  labels:
+    app.kubernetes.io/instance: production-infra
+    cluster-owner: tapasmishra
+  name: gcpcluster
+spec:
+  compositionRef:
+    name: cluster-google
+  parameters:
+    minNodeCount: 1
+    nodeSize: small
+  writeConnectionSecretToRef:
+    name: gcp-creds
+    namespace: crossplane-system

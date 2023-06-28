@@ -1,0 +1,15 @@
+# API Reference: https://doc.crds.dev/github.com/crossplane/provider-gcp/container.gcp.upbound.io/Cluster/v1beta1@v0.21.0 
+apiVersion: container.gcp.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: gke-crossplane-cluster
+spec:
+  forProvider:
+    network: "projects/magnetic-nimbus-389901/global/networks/network"
+    subnetwork: "projects/magnetic-nimbus-389901/regions/europe-west1/subnetworks/subnet"
+    location: europe-west1
+  providerConfigRef:
+    name: gcp-provider
+  writeConnectionSecretToRef:
+    name: gke-crossplane-cluster
+    namespace: default
