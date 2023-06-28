@@ -14,7 +14,7 @@ spec:
     patches:
     - fromFieldPath: metadata.labels
   resources:
-  - name: gkecluster
+  - name: cluster-google
     base:
       apiVersion: container.gcp.crossplane.io/v1beta1
       kind: GKECluster
