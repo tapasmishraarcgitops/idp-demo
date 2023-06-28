@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: production-infra
     cluster-owner: tapasmishra
-  name: gcpcluster
+  name: gcpclusternew
   namespace: infra
 spec:
   compositionRef:
