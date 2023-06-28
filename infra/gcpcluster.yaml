@@ -1,17 +1,15 @@
 apiVersion: devopstoolkitseries.com/v1alpha1
-kind: CompositeKubernetesCluster
+kind: ClusterClaim
 metadata:
   labels:
     app.kubernetes.io/instance: production-infra
-    cluster-owner: tapasmishra
-  name: gcpclusternew
+  name: gcpcluster
   namespace: infra
 spec:
-  compositionRef:
-    name: cluster-google
+  compositionSelector:
+    matchLabels:
+      cluster:  cluster-google
+  id: gcpcluster
   parameters:
     minNodeCount: 1
     nodeSize: small
-  writeConnectionSecretToRef:
-    name: gcp-creds
-    namespace: infra
