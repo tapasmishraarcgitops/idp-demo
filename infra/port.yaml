@@ -30,7 +30,7 @@ spec:
                 port:
                   entity:
                     mappings:
-                      - identifier: '"coecluster"'
+                      - identifier: '"cluster"'
                         title: '"coecluster"'
                         blueprint: '"cluster"'
                         properties:
