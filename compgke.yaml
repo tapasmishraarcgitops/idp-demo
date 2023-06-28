@@ -3,8 +3,7 @@ kind: Composition
 metadata:
   name: cluster-google
   labels:
-    provider: google
-    cluster: gke
+    cluster: cluster-google
 spec:
   compositeTypeRef:
     apiVersion: devopstoolkitseries.com/v1alpha1
