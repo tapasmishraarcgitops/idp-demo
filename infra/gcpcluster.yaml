@@ -3,7 +3,7 @@ kind: ClusterClaim
 metadata:
   labels:
     app.kubernetes.io/instance: production-infra
-  name: gcpcluster1
+  name: gcpcluster2
   namespace: infra
 spec:
   compositionSelector:
