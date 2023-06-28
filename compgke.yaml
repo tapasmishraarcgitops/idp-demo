@@ -7,8 +7,8 @@ metadata:
 spec:
   compositeTypeRef:
     apiVersion: devopstoolkitseries.com/v1alpha1
-    kind: ClusterClaim
-    # kind: CompositeCluster
+    #kind: ClusterClaim
+    kind: CompositeCluster
   patchSets:
   - name: metadata
     patches:
