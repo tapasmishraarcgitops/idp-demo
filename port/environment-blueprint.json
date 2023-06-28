@@ -10,7 +10,7 @@
     "calculationProperties": {},
     "relations": {
       "cluster": {
-        "target": "coecluster",
+        "target": "cluster",
         "many": false,
         "required": true,
         "title": "Cluster"
