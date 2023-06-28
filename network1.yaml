@@ -11,7 +11,7 @@ spec:
 #    routingConfig: 
  #     routingMode: 'REGIONAL'
   providerConfigRef:
-    name: gcp-provider
+    name: default
 ---
 apiVersion: compute.gcp.upbound.io/v1beta1
 kind: Subnetwork
@@ -27,5 +27,5 @@ spec:
       name: network
     region: europe-west1
   providerConfigRef:
-    name: gcp-provider
+    name: default
 

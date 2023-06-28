@@ -8,7 +8,7 @@ metadata:
 spec:
   compositeTypeRef:
     apiVersion: devopstoolkitseries.com/v1alpha1
-    kind: CompositeCluster
+    kind: CompositeKubernetesCluster
   patchSets:
   - name: metadata
     patches:
@@ -21,12 +21,14 @@ spec:
       spec:
         forProvider:
           location: us-east1
+          masterAuth:
+            username:
           initialClusterVersion: latest
         writeConnectionSecretToRef:
-          namespace: upbound-system
+          namespace: crossplane-system
     patches:
-    - fromFieldPath: spec.id
-      toFieldPath: metadata.name
+    - type: PatchSet
+      patchSetName: metadata
     - fromFieldPath: "metadata.uid"
       toFieldPath: "spec.writeConnectionSecretToRef.name"
       transforms:
@@ -37,6 +39,9 @@ spec:
       toFieldPath: spec.writeConnectionSecretToRef.namespace
     - fromFieldPath: spec.parameters.version
       toFieldPath: spec.forProvider.initialClusterVersion
+    - type: ToCompositeFieldPath
+      fromFieldPath: metadata.annotations[crossplane.io/external-name]
+      toFieldPath: status.clusterName
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.status
       toFieldPath: status.controlPlaneStatus
@@ -69,8 +74,8 @@ spec:
             autoRepair: true
             autoUpgrade: false
     patches:
-    - fromFieldPath: spec.id
-      toFieldPath: metadata.name
+    - type: PatchSet
+      patchSetName: metadata
     - fromFieldPath: spec.writeConnectionSecretToRef.namespace
       toFieldPath: spec.credentials.secretRef.namespace
     - fromFieldPath: spec.parameters.minNodeCount
@@ -92,4 +97,4 @@ spec:
     - type: MatchString
       fieldPath: status.atProvider.status
       matchString: RUNNING
-  writeConnectionSecretsToNamespace: upbound-system
+  writeConnectionSecretsToNamespace: crossplane-system

@@ -8,8 +8,8 @@ metadata:
 spec:
   compositionSelector:
     matchLabels:
-      cluster: google-cluster
-      provider: crossplane-provider-gcp-official
+      cluster:  cluster-google
+      provider: google
   id: gcpcluster
   parameters:
     minNodeCount: 1
