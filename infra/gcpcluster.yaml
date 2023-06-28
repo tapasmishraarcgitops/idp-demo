@@ -6,9 +6,11 @@ metadata:
   name: gcpcluster
   namespace: infra
 spec:
-  compositionSelector:
-    matchLabels:
-      cluster:  cluster-google
+  # compositionSelector:
+  #   matchLabels:
+  #     cluster:  cluster-google
+  compositionRef:
+    name: cluster-google
   id: gcpcluster
   parameters:
     minNodeCount: 1
