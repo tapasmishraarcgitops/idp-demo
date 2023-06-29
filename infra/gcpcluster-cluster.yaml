@@ -8,7 +8,7 @@ spec:
   id: cluster-google
   compositionSelector:
     matchLabels:
-      provider: google
+      # provider: google
       cluster: cluster-google
   parameters:
     nodeSize: small
