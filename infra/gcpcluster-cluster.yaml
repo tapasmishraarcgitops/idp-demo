@@ -5,7 +5,6 @@ metadata:
   name: gcpcluster
   namespace: infra
 spec:
-  id: gcpcluster
   compositionSelector:
     matchLabels:
       provider: google
