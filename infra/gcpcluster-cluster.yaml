@@ -2,7 +2,7 @@
 apiVersion: devopstoolkitseries.com/v1alpha1
 kind: ClusterClaim
 metadata:
-  name: gcpclusternewone
+  name: gcpclusternewonegke
   namespace: infra
 spec:
   id: cluster-google
