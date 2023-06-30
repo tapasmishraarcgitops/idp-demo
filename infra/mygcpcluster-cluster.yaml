@@ -1,0 +1,15 @@
+---
+apiVersion: devopstoolkitseries.com/v1alpha1
+kind: ClusterClaim
+metadata:
+  name: mygcpcluster
+  namespace: infra
+spec:
+  id: mygcpcluster
+  compositionSelector:
+    matchLabels:
+      provider: google
+      cluster: cluster-google
+  parameters:
+    nodeSize: small
+    minNodeCount: 1
