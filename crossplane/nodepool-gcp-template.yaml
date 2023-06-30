@@ -10,7 +10,7 @@ spec:
       enabled: true
       minNodeCount: 1
       maxNodeCount: 4
-    cluster: projects/YOUR_PROJECT_ID/locations/europe-west1/clusters/gke-crossplane-cluster
+    cluster: projects/magnetic-nimbus-389901/locations/europe-west1/clusters/gke-crossplane-cluster
     config:
       serviceAccount: YOUR_SERVICE_ACCOUNT@YOUR_PROJECT_ID.iam.gserviceaccount.com
       diskSizeGb: 100
