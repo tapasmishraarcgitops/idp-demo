@@ -15,7 +15,8 @@ jobs:
           fetch-depth: 0
       - name: Delete cluster
         run: |
-          rm infra/${{ inputs.name }}.yaml
+          rm infra/${{ inputs.name }}-cluster.yaml
+          rm infra/${{ inputs.name }}-nodepool.yaml
       - name: Commit changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
