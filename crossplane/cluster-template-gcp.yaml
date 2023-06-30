@@ -7,8 +7,8 @@ metadata:
 spec:
   forProvider:
     initialClusterVersion: latest
-    network: "projects/YOUR_PROJECT_ID/global/networks/network"
-    subnetwork: "projects/YOUR_PROJECT_ID/regions/europe-west1/subnetworks/subnet"
+    network: "projects/magnetic-nimbus-389901/global/networks/network"
+    subnetwork: "projects/magnetic-nimbus-389901/regions/europe-west1/subnetworks/subnet"
     ipAllocationPolicy:
       useIpAliases: true
     defaultMaxPodsConstraint:
