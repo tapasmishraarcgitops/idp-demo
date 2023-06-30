@@ -31,8 +31,8 @@ jobs:
           fetch-depth: 0
       - name: Create cluster
         run: |
-          chmod +x scripts/create-cluster.sh
-          ./scripts/create-cluster.sh ${{ inputs.name }} ${{ inputs.provider }} ${{ inputs.cluster }} ${{ inputs.node-size }} ${{ inputs.min-node-count }}
+          chmod +x scripts/create-cluster-new.sh
+          ./scripts/create-cluster-new.sh ${{ inputs.name }} ${{ inputs.provider }} ${{ inputs.cluster }} ${{ inputs.node-size }} ${{ inputs.min-node-count }}
       - name: Commit changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
