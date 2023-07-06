@@ -1,0 +1,45 @@
+---
+# API Reference: https://doc.crds.dev/github.com/crossplane/provider-gcp/container.gcp.crossplane.io/Cluster/v1beta2@v0.21.0 
+apiVersion: container.gcp.crossplane.io/v1beta2
+kind: Cluster
+metadata:
+  name: mygitopsgke
+spec:
+  forProvider:
+    initialClusterVersion: latest
+    network: "projects/magnetic-nimbus-389901/global/networks/network"
+    subnetwork: "projects/magnetic-nimbus-389901/regions/europe-west1/subnetworks/subnet"
+    ipAllocationPolicy:
+      useIpAliases: true
+    defaultMaxPodsConstraint:
+      maxPodsPerNode: 110 # By default, GKE allows up to 110 Pods per node on Standard clusters
+    addonsConfig:
+      cloudRunConfig:
+        disabled: true
+        loadBalancerType: LOAD_BALANCER_TYPE_UNSPECIFIED
+      dnsCacheConfig:
+        enabled: false
+      gcePersistentDiskCsiDriverConfig:
+        enabled: true
+      horizontalPodAutoscaling:
+        disabled: false
+      httpLoadBalancing:
+        disabled: false
+      kubernetesDashboard:
+        disabled: true
+      networkPolicyConfig:
+        disabled: false
+    location: europe-west1
+    binaryAuthorization:
+      enabled: false
+    legacyAbac:
+      enabled: false
+    masterAuth:
+      clientCertificateConfig:
+        issueClientCertificate: false
+    monitoringService: monitoring.googleapis.com/kubernetes
+  providerConfigRef:
+    name: crossplane-provider-gcp
+  writeConnectionSecretToRef:
+    name: gke-crossplane-cluster
+    namespace: default
