@@ -1,10 +1,10 @@
-name: Create a cluster
+name: Create PDS System
 on:
   workflow_dispatch:
     inputs:
       name:
         required: true
-        description: "The name of the cluster"
+        description: "The name of the system"
 
 jobs:
   deploy-app:
