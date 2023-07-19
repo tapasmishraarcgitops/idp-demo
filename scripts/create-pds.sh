@@ -5,7 +5,7 @@ FILE_PATH=gcpconfig/namespaces/${NAME}/namespace.yaml
 cd gcpconfig/namespaces
 mkdir ${NAME}
 cd ..
-cd..
+cd ..
 cp anthos/pds-template.yaml $FILE_PATH
 yq --inplace ".metadata.name = \"${NAME}\"" $FILE_PATH
 
