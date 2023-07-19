@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - name: Create cluster
         run: |
-          chmod +x scripts/create-cluster-new.sh
+          chmod +x scripts/create-pds.sh
           ./scripts/create-pds.sh ${{ inputs.name }} 
       - name: Commit changes
         run: |
