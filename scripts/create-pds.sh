@@ -15,5 +15,8 @@ cp anthos/pds-deploy-template.yaml $FILE_PATH
 yq --inplace ".metadata.name = \"${NAME}\"" $FILE_PATH
 yq --inplace ".metadata.labels.app = \"${NAME}\"" $FILE_PATH
 yq --inplace ".spec.selector.matchLabels.app = \"${NAME}\"" $FILE_PATH
+yq --inplace ".spec.template.metadata.labels.app = \"${NAME}\"" $FILE_PATH
+
+
 
 
