@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pds-104
+  labels:
+    app: pds-104
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: pds-104
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
