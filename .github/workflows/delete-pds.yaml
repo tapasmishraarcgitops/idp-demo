@@ -13,16 +13,15 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Delete cluster
+      - name: Delete System
         run: |
-          rm infra/${{ inputs.name }}-cluster.yaml
-          rm infra/${{ inputs.name }}-nodepool.yaml
+          rm -rf gcpconfig/namespaces/${{ inputs.name }}
       - name: Commit changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
-          git commit -m "Delete cluster ${{ inputs.name }}"
+          git commit -m "Delete system ${{ inputs.name }}"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
