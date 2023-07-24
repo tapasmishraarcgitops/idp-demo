@@ -1,4 +1,4 @@
-name: Create PDS System
+name: Create New System
 on:
   workflow_dispatch:
     inputs:
