@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testns
+  labels:
+    app: testns
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: testns
+  template:
+    metadata:
+      labels:
+        app: testns
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
